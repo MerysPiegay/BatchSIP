@@ -73,8 +73,8 @@ public class URLGet {
             }
         });
 
-        //System.out.println(disp(getHTML("http://192.168.1.62/cgi-bin/home.cgi")));
-        URL url = new URL("http://192.168.1.62/cgi-bin/home.cgi");
+        System.out.println((getHTML("http://192.168.1.62/cgi-bin/home.cgi")).replaceAll(">", ">\n"));
+        /*URL url = new URL("http://192.168.1.62/cgi-bin/home.cgi");
 
         BufferedReader bin = new BufferedReader(
                 new InputStreamReader(url.openStream()));
@@ -82,6 +82,6 @@ public class URLGet {
         String line;
         while ((line = bin.readLine()) != null) {
             System.out.println(line);
-        }
+        }*/
     }
 }

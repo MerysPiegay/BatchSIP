@@ -94,20 +94,20 @@ public class Projet {
         int i = sc.nextInt();
         ARP.arp(devices[i - 1]);
 
-        ParseARP.parse(adresses);
-
-        for (String adresse : adresses) {
-            System.out.println(adresse);
-            new ThreadFindIp(adresse, PORT, addresses, TIMEOUT).start();
-        }
-        Set<Thread> threads = Thread.getAllStackTraces().keySet();
-        threads.removeAll(baseThreads);
-        Thread[] threadArray = threads.toArray(new Thread[threads.size()]);
-        for (Thread threadArray1 : threadArray) {
-            threadArray1.join();
-            System.out.println(addresses);
-        }
-        
+       // ParseARP.parse(adresses);
+        /*
+         for (String adresse : adresses) {
+         System.out.println(adresse);
+         new ThreadFindIp(adresse, PORT, addresses, TIMEOUT).start();
+         }
+         Set<Thread> threads = Thread.getAllStackTraces().keySet();
+         threads.removeAll(baseThreads);
+         Thread[] threadArray = threads.toArray(new Thread[threads.size()]);
+         for (Thread threadArray1 : threadArray) {
+         threadArray1.join();
+         System.out.println(addresses);
+         }
+         */
     }
 
 }

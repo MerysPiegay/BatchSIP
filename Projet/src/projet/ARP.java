@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 
 import jpcap.*;
 import jpcap.packet.*;
-import static projet.URLGet.disp;
 import static projet.URLGet.getHTML;
 
 public class ARP {
