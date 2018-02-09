@@ -8,11 +8,9 @@ package projet;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.print.attribute.HashAttributeSet;
 import static projet.Projet.isPortOpen;
 
 /**
@@ -24,14 +22,12 @@ public class ThreadFindIp extends Thread {
     private String[] nip;
     private InetAddress addr;
     private int port;
-    private int nThread;
     private int timeout;
     private HashMap<InetAddress, Boolean> addresses;
 
-    public ThreadFindIp(String ipS, int pport, int pnThread, HashMap<InetAddress, Boolean> addresses, int timeout) throws IOException {
+    public ThreadFindIp(String ipS, int pport, HashMap<InetAddress, Boolean> addresses, int timeout) throws IOException {
         nip = ipS.split("[.]");
         port = pport;
-        nThread = pnThread;
         this.timeout = timeout;
         this.addresses = addresses;
     }

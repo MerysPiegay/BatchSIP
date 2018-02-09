@@ -85,14 +85,15 @@ public class ParseRoute {
 
     private void parseWindows() {
         try {
-            Process pro = Runtime.getRuntime().exec("cmd.exe /c route print");
+            Process pro = Runtime.getRuntime().exec("cmd.exe /c route -4 print");
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(pro.getInputStream()));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                line = line.trim();
-                String[] tokens = line.split(" ");
+                line = line.trim().replaceAll(" +", "\t");
+                String[] tokens = line.split("\t");
                 if (tokens.length == 5 && tokens[0].equals("0.0.0.0")) {
+                    System.out.println(line);
                     _gateway = tokens[2];
                     _subnet_mask = tokens[3];
                     _ip = tokens[3];
