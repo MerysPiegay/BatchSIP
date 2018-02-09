@@ -18,10 +18,12 @@ import jpcap.packet.Packet;
 class ARPPacketReceiver implements PacketReceiver {
 
     ArrayList<InetAddress> adresses;
+    ArrayList<String> macs;
     InetAddress local;
 
     public ARPPacketReceiver(InetAddress local) {
         this.adresses = new ArrayList<>();
+        this.macs = new ArrayList<>();
         this.local = local;
     }
 
@@ -30,6 +32,7 @@ class ARPPacketReceiver implements PacketReceiver {
 //((ARPPacket) packet).target_protoaddr)
         if (((ARPPacket) packet).getTargetProtocolAddress().equals(local)) {
             this.adresses.add((InetAddress) ((ARPPacket) packet).getSenderProtocolAddress());
+            this.macs.add(((ARPPacket) packet).getSenderHardwareAddress().toString());
         }
     }
 

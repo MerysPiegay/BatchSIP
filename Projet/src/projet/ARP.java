@@ -11,12 +11,18 @@ package projet;
  */
 import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import jpcap.*;
 import jpcap.packet.*;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import static projet.URLGet.getHTML;
 
 public class ARP {
@@ -69,11 +75,25 @@ public class ARP {
         t.start();
         Thread.sleep(10000);
         captor.breakLoop();
-        for (InetAddress i : aRPPacketReceiver.adresses) {
-            try {
-                System.out.println((getHTML("http:/" + i + "/cgi-bin/home.cgi")));
-            } catch (Exception ex) {
-                Logger.getLogger(ARP.class.getName()).log(Level.SEVERE, null, ex);
+        for (int i = 0; i < aRPPacketReceiver.adresses.size(); i++) {
+            if (aRPPacketReceiver.macs.get(i).startsWith("00:0c:ab")) {
+                try {
+                    Document doc;
+                    doc = Jsoup.parse(getHTML("http:/" + aRPPacketReceiver.adresses.get(i) + "/cgi-bin/network.cgi"));
+                    Element body = doc.select("body").first();
+
+                    for (Element e : body.getElementsByTag("tr")) {
+                        if (e.className().startsWith("content")) {
+                            //System.out.println(e);
+                            System.out.print(e.getElementsByClass("contentkey").text());
+
+                            // TODO
+                        }
+                    }
+
+                } catch (Exception ex) {
+                    Logger.getLogger(ARP.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 
